@@ -1,0 +1,75 @@
+ext{
+    android = [
+            compileSdkVersion : 29,
+            buildToolsVersion : "29.0.1",
+            applicationId     : "com.zhixiao.wanandroid",
+            minSdkVersion     : 21,
+            targetSdkVersion  : 29,
+            versionCode       : 1,
+            versionName       : "1.0.1"
+    ]
+
+    version = [
+            smartrefreshVersion       : "1.1.0-alpha-25",
+            okhttpVersion             : "3.12.0",
+            retrofitVersion           : "2.6.1",
+            glideVersion              : "4.9.0",
+            daggerVersion             : "2.22.1",
+            butterknifeVersion        : "8.8.1",
+            fragmentationVersion      : "1.3.6",
+    ]
+
+    dependencies = [
+            //ui
+            "SmartRefreshLayout"                : "com.scwang.smartrefresh:SmartRefreshLayout:${version["smartrefreshVersion"]}",
+            "SmartRefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:${version["smartrefreshVersion"]}",
+            "convenientbanner"                  : "com.bigkoo:convenientbanner:2.1.5",
+
+            //net
+            "gson"                              : "com.google.code.gson:gson:2.8.5",
+            "okhttp"                            : "com.squareup.okhttp3:okhttp:${version["okhttpVersion"]}",
+            "LoggingInterceptor"                : "com.squareup.okhttp3:logging-interceptor:${version["okhttpVersion"]}",
+            "retrofit"                          : "com.squareup.retrofit2:retrofit:${version["retrofitVersion"]}",
+            "converter-gson"                    : "com.squareup.retrofit2:converter-gson:${version["retrofitVersion"]}",
+            "converter-scalars"                 : "com.squareup.retrofit2:converter-scalars:${version["retrofitVersion"]}", // 获取原始json串
+            "adapter-rxjava2"                   : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitVersion"]}",
+            "glide"                             : "com.github.bumptech.glide:glide:${version["glideVersion"]}",
+            "glide-compiler"                    : "com.github.bumptech.glide:compiler:${version["glideVersion"]}",
+
+            //dao
+            "greendao"                          : "org.greenrobot:greendao:3.2.2",
+
+            //rx
+            "rxjava"                            : "io.reactivex.rxjava2:rxjava:2.1.7",
+            "rxandroid"                         : "io.reactivex.rxjava2:rxandroid:2.0.1",
+            "rxbinding"                         : "com.jakewharton.rxbinding2:rxbinding:2.1.0",
+            "rxpermissions"                     : "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar",
+            "rxlifecycle"                       : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+
+            //di
+            "dagger"                            : "com.google.dagger:dagger:${version["daggerVersion"]}",
+            "dagger-compiler"                   : "com.google.dagger:dagger-compiler:${version["daggerVersion"]}",
+            "dagger-android"                    : "com.google.dagger:dagger-android:${version["daggerVersion"]}",
+            "dagger-android-support"            : "com.google.dagger:dagger-android-support:${version["daggerVersion"]}",
+            "dagger-android-processor"          : "com.google.dagger:dagger-android-processor:${version["daggerVersion"]}",
+            "javax-annotation"                  : "org.glassfish:javax.annotation:10.0-b28",
+            "butterknife"                       : "com.jakewharton:butterknife:${version["butterknifeVersion"]}",
+            "butterknife-compiler"              : "com.jakewharton:butterknife-compiler:${version["butterknifeVersion"]}",
+
+            //multidex
+            "multidex"                          : "com.android.support:multidex:1.0.3",
+
+            //kotlin
+//            "kotlin-stdlib"                     : "org.jetbrains.kotlin:kotlin-stdlib:1.2.10",
+
+            //other
+            "lottie"                            : "com.airbnb.android:lottie:2.7.0",
+            "BaseRecyclerViewAdapterHelper"     : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47",
+            "fragmentation"                     : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",
+            "fragmentation-swipeback"           : "me.yokeyword:fragmentation-swipeback:${version["fragmentationVersion"]}",
+            "crashreport-upgrade"               : "com.tencent.bugly:crashreport_upgrade:latest.release",
+            "logger"                            : "com.orhanobut:logger:2.2.0",
+            "ByeBurger"                         : "com.github.githubwing:ByeBurger:1.2.3",
+    ]
+
+}
