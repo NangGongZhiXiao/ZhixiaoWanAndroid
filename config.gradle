@@ -15,8 +15,8 @@ ext{
             retrofitVersion           : "2.6.1",
             glideVersion              : "4.9.0",
             daggerVersion             : "2.22.1",
-            butterknifeVersion        : "8.8.1",
-            fragmentationVersion      : "1.3.6",
+            butterknifeVersion        : "10.0.0",
+            fragmentationVersion      : "1.3.6"
     ]
 
     dependencies = [
@@ -56,9 +56,6 @@ ext{
             "butterknife"                       : "com.jakewharton:butterknife:${version["butterknifeVersion"]}",
             "butterknife-compiler"              : "com.jakewharton:butterknife-compiler:${version["butterknifeVersion"]}",
 
-            //multidex
-            "multidex"                          : "com.android.support:multidex:1.0.3",
-
             //kotlin
 //            "kotlin-stdlib"                     : "org.jetbrains.kotlin:kotlin-stdlib:1.2.10",
 
@@ -70,6 +67,7 @@ ext{
             "crashreport-upgrade"               : "com.tencent.bugly:crashreport_upgrade:latest.release",
             "logger"                            : "com.orhanobut:logger:2.2.0",
             "ByeBurger"                         : "com.github.githubwing:ByeBurger:1.2.3",
+            "statusBarUtil"                    : "com.jaeger.statusbarutil:library:1.5.1"
     ]
 
 }
