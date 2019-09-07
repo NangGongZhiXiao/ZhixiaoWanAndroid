@@ -101,7 +101,8 @@ public class HttpRemoteRepository implements HttpRemoteSource {
             }
         };
         // 添加缓存拦截器
-        builder.addInterceptor(netCacheInterceptor);
+        // todo 不知为何该缓存拦截器没有效果
+//        builder.addInterceptor(netCacheInterceptor);
         // 最大50M的缓存容量
         builder.cache(new Cache(new File(Constants.PATH_HTTP_CACHE), 1024*1024*50))
                 .callTimeout(Constants.HTTP_TIME_OUT, TimeUnit.MILLISECONDS)
