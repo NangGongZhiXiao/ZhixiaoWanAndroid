@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.zhixiao.wanandroid.base.presenter.BasePresenter;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
@@ -18,9 +20,10 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * @Author: zhixiao
  * @CreateDate: 2019/9/4
  */
-public abstract class AbstractBaseFragment extends SwipeBackFragment {
+public abstract class AbstractBaseFragment<T extends BasePresenter> extends SwipeBackFragment {
     private Unbinder unbinder;
     private View view;
+    protected T presenter;
 
     @Nullable
     @Override
@@ -30,8 +33,12 @@ public abstract class AbstractBaseFragment extends SwipeBackFragment {
         unbinder = ButterKnife.bind(this, view);
         initView();
         initEventAndData();
+        presenter = createPresenter();
+        presenter.attachView((BaseView) this);
         return attachToSwipeBack(view);
     }
+
+    protected abstract T createPresenter();
 
     /**
      * 初始化数据

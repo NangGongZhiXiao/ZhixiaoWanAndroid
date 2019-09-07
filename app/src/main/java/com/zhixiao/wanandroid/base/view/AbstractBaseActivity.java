@@ -1,14 +1,16 @@
 package com.zhixiao.wanandroid.base.view;
 
 import android.os.Bundle;
-import android.view.WindowManager;
+import androidx.appcompat.app.AppCompatDelegate;
 
 
-import com.jaeger.library.StatusBarUtil;
+import com.zhixiao.wanandroid.base.presenter.BasePresenter;
+import com.zhixiao.wanandroid.utils.LogUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
+
 
 /**
  * @ClassName: AbstractBaseActivity
@@ -16,8 +18,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * @Author: zhixiao
  * @CreateDate: 2019/9/4
  */
-public abstract class AbstractBaseActivity extends SwipeBackActivity {
+public abstract class AbstractBaseActivity<T extends BasePresenter> extends SwipeBackActivity {
     private Unbinder unbinder;
+    protected T presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,11 @@ public abstract class AbstractBaseActivity extends SwipeBackActivity {
         unbinder = ButterKnife.bind(this);
         initView();
         initEventAndData();
+        presenter = createPresenter();
+        presenter.attachView((BaseView) this);
     }
+
+    protected abstract T createPresenter();
 
     @Override
     protected void onDestroy() {
@@ -50,4 +57,15 @@ public abstract class AbstractBaseActivity extends SwipeBackActivity {
      * @return
      */
     protected abstract int getLayoutId();
+
+    public final void setNightMode(boolean night){
+        LogUtil.i("set night mode " + night);
+        AppCompatDelegate.setDefaultNightMode(night ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        recreate();
+    }
+
+    public final boolean getNightMode(){
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+    }
 }

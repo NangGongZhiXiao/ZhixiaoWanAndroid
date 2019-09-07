@@ -5,7 +5,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.DiskLogStrategy;
 import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.LogcatLogStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zhixiao.wanandroid.BuildConfig;
@@ -27,6 +29,8 @@ public class LogUtil {
     public static void init(){
         FormatStrategy strategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(true)
+                .methodCount(1)
+                .methodOffset(0)
                 .tag(TAG)
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(strategy){

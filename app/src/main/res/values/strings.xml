@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ZhixiaoWanAndroid</string>
+    <string name="mode_night">夜间模式</string>
 </resources>

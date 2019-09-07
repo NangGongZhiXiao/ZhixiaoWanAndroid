@@ -9,4 +9,7 @@ import com.zhixiao.wanandroid.base.presenter.BasePresenter;
  * @CreateDate: 2019/9/4
  */
 public interface BaseView <T extends BasePresenter>{
+    void setNightMode(boolean night);
+
+    boolean getNightMode();
 }

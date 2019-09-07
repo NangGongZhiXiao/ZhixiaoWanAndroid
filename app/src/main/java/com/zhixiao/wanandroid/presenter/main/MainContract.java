@@ -10,11 +10,11 @@ import com.zhixiao.wanandroid.base.view.BaseView;
  * @CreateDate: 2019/9/4
  */
 public interface MainContract {
-    interface MainView extends BaseView<MainContract.MainPresenter>{
+    interface View extends BaseView<Presenter>{
 
     }
 
-    interface MainPresenter extends BasePresenter<MainView>{
-
+    interface Presenter extends BasePresenter<View>{
+        void changeModeNight(boolean night);
     }
 }

@@ -2,10 +2,14 @@ package com.zhixiao.wanandroid.app;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.zhixiao.wanandroid.model.DataRepository;
 import com.zhixiao.wanandroid.model.bean.SearchHistoryData;
 import com.zhixiao.wanandroid.model.dao.DaoMaster;
 import com.zhixiao.wanandroid.model.dao.DaoSession;
 import com.zhixiao.wanandroid.model.dao.SearchHistoryDataDao;
+import com.zhixiao.wanandroid.utils.DataRepositoryUtils;
 import com.zhixiao.wanandroid.utils.LogUtil;
 
 
@@ -18,13 +22,17 @@ import com.zhixiao.wanandroid.utils.LogUtil;
 public class APP extends Application {
     private static APP instance;
     private DaoSession daoSession;
+    private DataRepository dataRepository;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        // 各部分初始化
         LogUtil.init();
         initGreenDao();
+        dataRepository = DataRepositoryUtils.provideDataRepository();
     }
 
     public static APP getInstance() {
@@ -43,5 +51,9 @@ public class APP extends Application {
 
     public DaoSession getDaoSession() {
         return daoSession;
+    }
+
+    public DataRepository getDataRepository() {
+        return dataRepository;
     }
 }
