@@ -1,21 +1,20 @@
-package com.zhixiao.wanandroid.presenter.main;
+package com.zhixiao.wanandroid.presenter.login;
 
 import com.zhixiao.wanandroid.base.presenter.BasePresenter;
 import com.zhixiao.wanandroid.base.view.BaseView;
 
 /**
- * @ClassName: MainContract
+ * @ClassName: LoginContract
  * @Description:
  * @Author: zhixiao
- * @CreateDate: 2019/9/4
+ * @CreateDate: 2019/9/9
  */
-public interface MainContract {
+public interface LoginContract {
     interface View extends BaseView<Presenter>{
 
-        void startLogin();
     }
 
     interface Presenter extends BasePresenter<View>{
-        void changeModeNight(boolean night);
+        void login();
     }
 }

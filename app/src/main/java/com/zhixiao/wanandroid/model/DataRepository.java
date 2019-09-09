@@ -3,6 +3,7 @@ package com.zhixiao.wanandroid.model;
 
 import androidx.annotation.NonNull;
 
+import com.zhixiao.wanandroid.component.event.LoginStatusEvent;
 import com.zhixiao.wanandroid.model.bean.ResponseBody;
 import com.zhixiao.wanandroid.model.bean.banner.HomePageBannerModel;
 import com.zhixiao.wanandroid.model.bean.collect.CollectData;
@@ -188,5 +189,15 @@ public class DataRepository implements DatabaseSource, ShredPreferenceSource, Ht
     @Override
     public Observable<ResponseBody<HomeArticleListData>> getWxArticleHistoryByKey(int id, int pageNum, String key) {
         return httpRemoteSource.getWxArticleHistoryByKey(id, pageNum, key);
+    }
+
+    @Override
+    public Observable<LoginStatusEvent> getLoginStatus() {
+        return shredPreferenceSource.getLoginStatus();
+    }
+
+    @Override
+    public void setLoginStatus(LoginStatusEvent event) {
+
     }
 }

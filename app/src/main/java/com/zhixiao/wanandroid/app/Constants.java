@@ -33,4 +33,8 @@ public class Constants {
      * http读写超时时间，m
      */
     public static final long HTTP_RW_TIME_OUT = 30;
+    /**
+     * ShredPreferenceRepository库的文件
+     */
+    public static final String SHARED_PREFERENCE_REPOSITORY = "zhixiao";
 }

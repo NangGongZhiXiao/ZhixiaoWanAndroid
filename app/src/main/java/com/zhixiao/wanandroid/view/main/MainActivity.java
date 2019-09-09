@@ -7,24 +7,20 @@ import android.widget.TextView;
 import com.zhixiao.wanandroid.R;
 import com.zhixiao.wanandroid.app.APP;
 import com.zhixiao.wanandroid.base.view.AbstractBaseActivity;
+import com.zhixiao.wanandroid.base.view.MVPBaseActivity;
 import com.zhixiao.wanandroid.component.RxBus;
 import com.zhixiao.wanandroid.component.event.ModeNightEvent;
 import com.zhixiao.wanandroid.model.bean.ResponseBody;
 import com.zhixiao.wanandroid.model.bean.home.HomeArticleListData;
 import com.zhixiao.wanandroid.presenter.main.MainContract;
 import com.zhixiao.wanandroid.presenter.main.MainPresenter;
-import com.zhixiao.wanandroid.utils.LogUtil;
+import com.zhixiao.wanandroid.view.login.LoginActivity;
 
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.observers.BlockingBaseObserver;
-import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AbstractBaseActivity<MainContract.Presenter>
+public class MainActivity extends MVPBaseActivity<MainContract.Presenter>
         implements MainContract.View {
 
     @BindView(R.id.hello)
@@ -60,4 +56,8 @@ public class MainActivity extends AbstractBaseActivity<MainContract.Presenter>
         return R.layout.activity_main;
     }
 
+    @Override
+    public void startLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }

@@ -8,9 +8,11 @@ import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhixiao.wanandroid.app.APP;
 import com.zhixiao.wanandroid.base.presenter.AbstractBasePresenter;
+import com.zhixiao.wanandroid.component.event.LoginStatusEvent;
 import com.zhixiao.wanandroid.model.bean.ResponseBody;
 import com.zhixiao.wanandroid.model.bean.home.HomeArticleListData;
 import com.zhixiao.wanandroid.utils.LogUtil;
+import com.zhixiao.wanandroid.view.main.MainActivity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -51,7 +53,17 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.View> impl
                     public void accept(Throwable throwable) throws Exception {
                         LogUtil.i(throwable.toString());
                     }
-                }));
-
+                })
+        );
+        addDisposable(APP.getInstance().getDataRepository().getLoginStatus()
+                .subscribe(new Consumer<LoginStatusEvent>() {
+                    @Override
+                    public void accept(LoginStatusEvent event) throws Exception {
+                        if(!event.isLogin()){
+                            view.startLogin();
+                        }
+                    }
+                })
+        );
     }
 }

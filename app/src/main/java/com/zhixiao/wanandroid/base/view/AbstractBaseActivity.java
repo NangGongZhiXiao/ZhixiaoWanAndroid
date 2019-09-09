@@ -18,10 +18,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * @Author: zhixiao
  * @CreateDate: 2019/9/4
  */
-public abstract class AbstractBaseActivity<T extends BasePresenter> extends SwipeBackActivity {
+public abstract class AbstractBaseActivity extends SwipeBackActivity {
     private Unbinder unbinder;
-    protected T presenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +27,8 @@ public abstract class AbstractBaseActivity<T extends BasePresenter> extends Swip
         unbinder = ButterKnife.bind(this);
         initView();
         initEventAndData();
-        presenter = createPresenter();
-        presenter.attachView((BaseView) this);
     }
 
-    protected abstract T createPresenter();
 
     @Override
     protected void onDestroy() {
