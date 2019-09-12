@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.zhixiao.wanandroid.app.APP;
 import com.zhixiao.wanandroid.app.Constants;
 import com.zhixiao.wanandroid.component.event.LoginStatusEvent;
+import com.zhixiao.wanandroid.component.event.ModeNightEvent;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -19,6 +20,7 @@ import io.reactivex.ObservableOnSubscribe;
  */
 public class ShredPreferenceRepository implements ShredPreferenceSource {
     private static final String LOGIN_STATUS = "login_status";
+    private static final String MODE_NIGHT_STATUS = "mode_night_status";
 
     private SharedPreferences sharedPreferences;
 
@@ -42,5 +44,16 @@ public class ShredPreferenceRepository implements ShredPreferenceSource {
     @Override
     public void setLoginStatus(LoginStatusEvent event) {
         sharedPreferences.edit().putBoolean(LOGIN_STATUS, event.isLogin()).apply();
+    }
+
+    @Override
+    public Observable<ModeNightEvent> getModeNight() {
+        return Observable.just(new ModeNightEvent(
+                sharedPreferences.getBoolean(MODE_NIGHT_STATUS, false)));
+    }
+
+    @Override
+    public void setModeNight(ModeNightEvent event) {
+        sharedPreferences.edit().putBoolean(MODE_NIGHT_STATUS, event.isNight()).apply();
     }
 }

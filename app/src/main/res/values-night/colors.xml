@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorDefaultBackground">#8d1B20</color>
+    <color name="color_background">#262626</color>
+    <color name="color_background2">#323232</color>
+    <color name="color_icon_background">#dddddd</color>
+    <color name="color_text_title">#EFEFEF</color>
+    <color name="color_text_title_reverse">#121212</color>
+    <color name="color_text_comment">#C0C0C0</color>
 
 </resources>

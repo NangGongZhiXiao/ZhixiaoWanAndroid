@@ -17,5 +17,7 @@ public interface MainContract {
 
     interface Presenter extends BasePresenter<View>{
         void changeModeNight(boolean night);
+
+        void setModeNight(boolean checked);
     }
 }

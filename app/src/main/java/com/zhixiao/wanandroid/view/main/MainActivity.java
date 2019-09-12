@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.jaeger.library.StatusBarUtil;
 import com.zhixiao.wanandroid.R;
-import com.zhixiao.wanandroid.app.APP;
-import com.zhixiao.wanandroid.base.view.AbstractBaseActivity;
 import com.zhixiao.wanandroid.base.view.MVPBaseActivity;
-import com.zhixiao.wanandroid.component.RxBus;
-import com.zhixiao.wanandroid.component.event.ModeNightEvent;
-import com.zhixiao.wanandroid.model.bean.ResponseBody;
-import com.zhixiao.wanandroid.model.bean.home.HomeArticleListData;
 import com.zhixiao.wanandroid.presenter.main.MainContract;
 import com.zhixiao.wanandroid.presenter.main.MainPresenter;
 import com.zhixiao.wanandroid.view.login.LoginActivity;
@@ -30,11 +28,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.Presenter>
 
     @OnClick(R.id.switch_1)
     public void nightSwitch(){
-        RxBus.getInstance().post(new ModeNightEvent(aSwitch.isChecked()));
+        presenter.setModeNight(aSwitch.isChecked());
     }
     @OnClick(R.id.hello)
     public void onclick(View v){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override
@@ -49,6 +47,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.Presenter>
 
     @Override
     protected void initView() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.color_background2), 60);
+        aSwitch.setChecked(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     @Override

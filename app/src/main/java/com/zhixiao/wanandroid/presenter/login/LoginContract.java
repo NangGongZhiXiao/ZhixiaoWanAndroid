@@ -12,9 +12,14 @@ import com.zhixiao.wanandroid.base.view.BaseView;
 public interface LoginContract {
     interface View extends BaseView<Presenter>{
 
+        void loginSucceed();
+
+        void loginFailed();
+
+        void networkError();
     }
 
     interface Presenter extends BasePresenter<View>{
-        void login();
+        void login(String name, String password);
     }
 }

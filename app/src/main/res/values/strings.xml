@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">ZhixiaoWanAndroid</string>
     <string name="mode_night">夜间模式</string>
+    <string name="login_name_hint">请输入用户名</string>
+    <string name="login">登 录</string>
+    <string name="account_name">who you are?</string>
+    <string name="sign_up">注 册</string>
+    <string name="next">下一步</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="you_have_to_input_account_name">请输入用户名</string>
+    <string name="input_password">请输入密码</string>
+    <string name="you_have_to_input_password">请输入密码</string>
+    <string name="login_failed">登录失败</string>
+    <string name="network_error">请检查网络</string>
+    <string name="confirm">确定</string>
+    <string name="is_have_account">已有账号？</string>
+    <string name="go_back_login">返回登录</string>
+    <string name="input_account_name">请输入用户名</string>
+    <string name="input_password_again">请重新输入密码</string>
 </resources>

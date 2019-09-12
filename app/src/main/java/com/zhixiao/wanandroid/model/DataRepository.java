@@ -4,6 +4,7 @@ package com.zhixiao.wanandroid.model;
 import androidx.annotation.NonNull;
 
 import com.zhixiao.wanandroid.component.event.LoginStatusEvent;
+import com.zhixiao.wanandroid.component.event.ModeNightEvent;
 import com.zhixiao.wanandroid.model.bean.ResponseBody;
 import com.zhixiao.wanandroid.model.bean.banner.HomePageBannerModel;
 import com.zhixiao.wanandroid.model.bean.collect.CollectData;
@@ -35,15 +36,15 @@ import io.reactivex.Observable;
  */
 public class DataRepository implements DatabaseSource, ShredPreferenceSource, HttpRemoteSource {
     private DatabaseSource databaseSource;
-    private ShredPreferenceSource shredPreferenceSource;
+    private ShredPreferenceSource sharedPreferenceSource;
     private HttpRemoteSource httpRemoteSource;
     private static DataRepository instance;
 
     private DataRepository(@NonNull DatabaseSource databaseSource,
-                           @NonNull ShredPreferenceSource shredPreferenceSource,
+                           @NonNull ShredPreferenceSource sharedPreferenceSource,
                            @NonNull HttpRemoteSource httpRemoteSource) {
         this.databaseSource = databaseSource;
-        this.shredPreferenceSource = shredPreferenceSource;
+        this.sharedPreferenceSource = sharedPreferenceSource;
         this.httpRemoteSource = httpRemoteSource;
     }
 
@@ -193,11 +194,19 @@ public class DataRepository implements DatabaseSource, ShredPreferenceSource, Ht
 
     @Override
     public Observable<LoginStatusEvent> getLoginStatus() {
-        return shredPreferenceSource.getLoginStatus();
+        return sharedPreferenceSource.getLoginStatus();
     }
 
     @Override
-    public void setLoginStatus(LoginStatusEvent event) {
+    public void setLoginStatus(LoginStatusEvent event) { }
 
+    @Override
+    public Observable<ModeNightEvent> getModeNight() {
+        return sharedPreferenceSource.getModeNight();
+    }
+
+    @Override
+    public void setModeNight(ModeNightEvent event) {
+        sharedPreferenceSource.setModeNight(event);
     }
 }

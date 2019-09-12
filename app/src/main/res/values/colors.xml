@@ -4,5 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorDefaultBackground">#D81B60</color>
+    <color name="color_background">#DFDFDF</color>
+    <color name="color_background2">#EFEFEF</color>
+    <color name="color_icon_background">#222222</color>
+    <color name="color_text_title">#121212</color>
+    <color name="color_text_title_reverse">#EFEFEF</color>
+    <color name="color_text_comment">#404040</color>
 </resources>
