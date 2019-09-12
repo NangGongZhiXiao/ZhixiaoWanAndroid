@@ -2,9 +2,11 @@ package com.zhixiao.wanandroid.view.login;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.text.Editable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * @ClassName: SignUpFragment
@@ -30,21 +33,35 @@ public class SignUpFragment extends AbstractBaseFragment<SignUpContract.Presente
         implements SignUpContract.View{
 
     @BindView(R.id.img_go_back)
-    public ImageView imgBack;
+    ImageView imgBack;
     @BindView(R.id.et_sign_up_name)
-    public EditText etName;
+    EditText etName;
     @BindView(R.id.et_sign_up_password)
-    public EditText etPw;
+    EditText etPw;
     @BindView(R.id.et_sign_up_repassword)
-    public EditText etRP;
+    EditText etRP;
     @BindView(R.id.tv_sign_up_confirm)
-    public TextView tvConfirm;
+    TextView tvConfirm;
     @BindView(R.id.tv_back_login)
-    public TextView tvBackLogin;
+    TextView tvBackLogin;
 
     @OnClick({R.id.img_go_back, R.id.tv_back_login})
-    public void backLogin(){
+    void backLogin(){
         pop();
+    }
+
+    @OnClick({R.id.tv_sign_up_confirm})
+    void signUp(){
+        if(etName.getText().toString().isEmpty()){
+            Toast.makeText(getContext(), R.string.input_account_name, Toast.LENGTH_SHORT).show();
+        }else if(etPw.getText().toString().isEmpty() || etRP.getText().toString().isEmpty()){
+            Toast.makeText(getContext(), R.string.input_password, Toast.LENGTH_SHORT).show();
+        }else if(!etPw.getText().toString().equals(etRP.getText().toString())){
+            Toast.makeText(getContext(), R.string.inconsistent_passwords, Toast.LENGTH_SHORT).show();
+        }else{
+            presenter.signUp(etName.getText().toString(),
+                    etPw.getText().toString(), etRP.getText().toString());
+        }
     }
 
     @Override
@@ -75,5 +92,16 @@ public class SignUpFragment extends AbstractBaseFragment<SignUpContract.Presente
     @Override
     public boolean getNightMode() {
         return false;
+    }
+
+    @Override
+    public void signUpSuccessful() {
+        Toast.makeText(getContext(), R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
+        Objects.requireNonNull(getActivity()).finish();
+    }
+
+    @Override
+    public void signUpFailed(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

@@ -17,4 +17,7 @@
     <string name="go_back_login">返回登录</string>
     <string name="input_account_name">请输入用户名</string>
     <string name="input_password_again">请重新输入密码</string>
+    <string name="inconsistent_passwords">密码不一致</string>
+    <string name="sign_up_successful">注册成功，请重试</string>
+    <string name="sign_up_fauled">注册失败</string>
 </resources>
