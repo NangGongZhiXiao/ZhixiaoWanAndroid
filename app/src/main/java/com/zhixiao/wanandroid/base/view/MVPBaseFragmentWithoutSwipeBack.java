@@ -12,17 +12,28 @@ import com.zhixiao.wanandroid.base.presenter.BasePresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * @ClassName: AbstractBaseFragment
- * @Description: 实现了滑动返回，ButterKnife的生命周期绑定
+ * @ClassName: MVPBaseFragmentWithoutSwipeBack
+ * @Description:
+ *              在不需要swipeBack的地方使用mvp模式的fragment
+ *              例如在viewPager使用时fragment的view会被swipeLayout替换，过宽的view会遮盖左边的页
  * @Author: zhixiao
- * @CreateDate: 2019/9/4
+ * @CreateDate: 2019/9/18
  */
-public abstract class AbstractBaseFragment extends SwipeBackFragment {
+public abstract class MVPBaseFragmentWithoutSwipeBack<T extends BasePresenter>
+        extends SupportFragment implements BaseView<T>  {
     private Unbinder unbinder;
-    private View view;
+    protected View view;
+    protected T presenter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = createPresenter();
+        presenter.attachView(this);
+    }
 
     @Nullable
     @Override
@@ -31,18 +42,11 @@ public abstract class AbstractBaseFragment extends SwipeBackFragment {
         view = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
-        return attachToSwipeBack(view);
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        // 懒加载，避免一次性加载数据
         initEventAndData();
+        return view;
     }
 
     /**
-     * 懒加载
      * 初始化数据
      */
     protected abstract void initEventAndData();
@@ -57,6 +61,7 @@ public abstract class AbstractBaseFragment extends SwipeBackFragment {
         super.onDestroy();
         unbinder.unbind();
         unbinder = null;
+        presenter.detachView();
     }
 
     /**
@@ -64,4 +69,11 @@ public abstract class AbstractBaseFragment extends SwipeBackFragment {
      * @return
      */
     protected abstract int getLayoutId();
+
+    public final void setNightMode(boolean night){
+    }
+
+    public final boolean getNightMode(){
+        return false;
+    }
 }

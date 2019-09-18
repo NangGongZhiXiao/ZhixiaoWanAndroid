@@ -42,7 +42,7 @@ public class SignUpPresenter extends AbstractBasePresenter<SignUpContract.View>
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        view.signUpFailed(APP.getInstance().getResources().getString(R.string.sign_up_fauled));
+                        view.signUpFailed(APP.getInstance().getResources().getString(R.string.sign_up_failed));
                     }
                 })
         );

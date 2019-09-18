@@ -52,6 +52,7 @@ public abstract class AbstractBasePresenter<T extends BaseView> implements BaseP
         view = null;
         if(compositeDisposable != null){
             compositeDisposable.clear();
+            compositeDisposable = null;
         }
     }
 

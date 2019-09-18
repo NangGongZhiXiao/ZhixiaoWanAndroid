@@ -10,4 +10,5 @@
     <color name="color_text_title">#121212</color>
     <color name="color_text_title_reverse">#EFEFEF</color>
     <color name="color_text_comment">#404040</color>
+    <color name="color_accent">#DF45FD</color>
 </resources>

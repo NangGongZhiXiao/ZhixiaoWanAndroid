@@ -1,19 +1,12 @@
 package com.zhixiao.wanandroid.view.login;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.text.Editable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhixiao.wanandroid.R;
-import com.zhixiao.wanandroid.base.presenter.BasePresenter;
-import com.zhixiao.wanandroid.base.view.AbstractBaseFragment;
+import com.zhixiao.wanandroid.base.view.MVPBaseFragment;
 import com.zhixiao.wanandroid.presenter.login.SignUpContract;
 import com.zhixiao.wanandroid.presenter.login.SignUpPresenter;
 
@@ -21,7 +14,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 /**
  * @ClassName: SignUpFragment
@@ -29,7 +21,7 @@ import butterknife.OnTextChanged;
  * @Author: zhixiao
  * @CreateDate: 2019/9/12
  */
-public class SignUpFragment extends AbstractBaseFragment<SignUpContract.Presenter>
+public class SignUpFragment extends MVPBaseFragment<SignUpContract.Presenter>
         implements SignUpContract.View{
 
     @BindView(R.id.img_go_back)
@@ -65,7 +57,7 @@ public class SignUpFragment extends AbstractBaseFragment<SignUpContract.Presente
     }
 
     @Override
-    protected SignUpContract.Presenter createPresenter() {
+    public SignUpContract.Presenter createPresenter() {
         return new SignUpPresenter();
     }
 

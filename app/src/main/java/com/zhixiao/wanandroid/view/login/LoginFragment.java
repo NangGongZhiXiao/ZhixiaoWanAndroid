@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zhixiao.wanandroid.R;
 import com.zhixiao.wanandroid.base.view.AbstractBaseFragment;
+import com.zhixiao.wanandroid.base.view.MVPBaseFragment;
 import com.zhixiao.wanandroid.presenter.login.LoginContract;
 import com.zhixiao.wanandroid.presenter.login.LoginPresenter;
 import com.zhixiao.wanandroid.utils.NamePictureCreator;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
  * @Author: zhixiao
  * @CreateDate: 2019/9/9
  */
-public class LoginFragment extends AbstractBaseFragment<LoginContract.Presenter>
+public class LoginFragment extends MVPBaseFragment<LoginContract.Presenter>
         implements LoginContract.View {
 
     private String name;
@@ -122,7 +123,7 @@ public class LoginFragment extends AbstractBaseFragment<LoginContract.Presenter>
     }
 
     @Override
-    protected LoginContract.Presenter createPresenter() {
+    public LoginContract.Presenter createPresenter() {
         return new LoginPresenter();
     }
 

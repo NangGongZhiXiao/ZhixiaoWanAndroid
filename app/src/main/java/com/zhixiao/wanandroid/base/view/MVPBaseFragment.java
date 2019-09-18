@@ -5,24 +5,23 @@ import android.os.Bundle;
 import com.zhixiao.wanandroid.base.presenter.BasePresenter;
 
 /**
- * @ClassName: MVPBaseActivity
- * @Description: 支持mvp的baseActivity
+ * @ClassName: MVPBaseFragment
+ * @Description: 支持mvp的baseFragment
  * @Author: zhixiao
- * @CreateDate: 2019/9/9
+ * @CreateDate: 2019/9/16
  */
-public abstract class MVPBaseActivity<T extends BasePresenter> extends AbstractBaseActivity implements BaseView<T>{
+public abstract class MVPBaseFragment<T extends BasePresenter> extends AbstractBaseFragment implements BaseView<T>{
     protected T presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = createPresenter();
         presenter.attachView(this);
     }
 
-
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         presenter.detachView();
     }

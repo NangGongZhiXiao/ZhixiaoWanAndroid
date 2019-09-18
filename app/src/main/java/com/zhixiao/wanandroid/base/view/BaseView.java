@@ -12,4 +12,6 @@ public interface BaseView <T extends BasePresenter>{
     void setNightMode(boolean night);
 
     boolean getNightMode();
+
+    T createPresenter();
 }

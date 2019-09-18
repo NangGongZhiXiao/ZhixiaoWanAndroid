@@ -3,9 +3,8 @@ package com.zhixiao.wanandroid.view.login;
 import com.jaeger.library.StatusBarUtil;
 import com.zhixiao.wanandroid.R;
 import com.zhixiao.wanandroid.base.view.AbstractBaseActivity;
-import com.zhixiao.wanandroid.base.view.BaseView;
 
-public class LoginActivity extends AbstractBaseActivity implements BaseView {
+public class LoginActivity extends AbstractBaseActivity {
 
     @Override
     protected void initEventAndData() {

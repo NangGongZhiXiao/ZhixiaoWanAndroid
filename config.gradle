@@ -67,7 +67,7 @@ ext{
             "crashreport-upgrade"               : "com.tencent.bugly:crashreport_upgrade:latest.release",
             "logger"                            : "com.orhanobut:logger:2.2.0",
             "ByeBurger"                         : "com.github.githubwing:ByeBurger:1.2.3",
-            "statusBarUtil"                    : "com.jaeger.statusbarutil:library:1.5.1"
+            "statusBarUtil"                     : "com.jaeger.statusbarutil:library:1.5.1"
     ]
 
 }
