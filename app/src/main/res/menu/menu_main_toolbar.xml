@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/toolbar_todo"
-        android:icon="@drawable/ic_sign_up_account"
+        android:icon="@drawable/ic_todo"
         android:title="todo"
         app:showAsAction="always"/>
 

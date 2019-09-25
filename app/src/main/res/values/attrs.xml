@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DropDownTabLayout">
+        <attr name="ddtl_tabbackgroud" format="reference"/>
+        <attr name="ddtl_tabpadding" format="dimension"/>
+        <attr name="ddtl_tabpadding_top" format="dimension"/>
+        <attr name="ddtl_tabpadding_bottom" format="dimension"/>
+        <attr name="ddtl_tabpadding_start" format="dimension"/>
+        <attr name="ddtl_tabpadding_end" format="dimension"/>
+        <attr name="ddtl_more_icon" format="reference"/>
+        <attr name="ddtl_less_icon" format="reference"/>
+    </declare-styleable>
+</resources>

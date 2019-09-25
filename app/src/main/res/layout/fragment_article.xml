@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.zhixiao.wanandroid.widget.DropDownTabLayout
+        android:id="@+id/tl_article"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="article"/>
+        android:layout_height="wrap_content"
+        app:ddtl_tabbackgroud="@drawable/bg_drop_down_tablayout_textview"
+        app:ddtl_tabpadding_start="10dp"
+        app:ddtl_tabpadding_end="10dp"
+        app:ddtl_tabpadding_top="5dp"
+        app:ddtl_tabpadding_bottom="5dp"
+        android:background="@color/color_background2"
+        android:elevation="1dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

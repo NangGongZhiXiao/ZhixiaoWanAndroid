@@ -52,6 +52,7 @@ dependencies {
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     implementation rootProject.ext.dependencies["lottie"]
     implementation rootProject.ext.dependencies["statusBarUtil"]
+    implementation rootProject.ext.dependencies["flow-layout"]
     //http
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["LoggingInterceptor"]
