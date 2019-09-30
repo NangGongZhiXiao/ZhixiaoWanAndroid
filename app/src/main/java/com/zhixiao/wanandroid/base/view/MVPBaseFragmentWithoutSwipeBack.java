@@ -31,8 +31,6 @@ public abstract class MVPBaseFragmentWithoutSwipeBack<T extends BasePresenter>
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = createPresenter();
-        presenter.attachView(this);
     }
 
     @Nullable
@@ -43,6 +41,8 @@ public abstract class MVPBaseFragmentWithoutSwipeBack<T extends BasePresenter>
         unbinder = ButterKnife.bind(this, view);
         initView();
         initEventAndData();
+        presenter = createPresenter();
+        presenter.attachView(this);
         return view;
     }
 

@@ -9,6 +9,7 @@
     <color name="color_icon_background">#dddddd</color>
     <color name="color_text_title">#D0D0D0</color>
     <color name="color_text_title_reverse">#121212</color>
-    <color name="color_text_comment">#C0C0C0</color>
+    <color name="color_text_content">#C2C2C2</color>
+    <color name="color_text_comment">#B0B0B0</color>
 
 </resources>

@@ -1,6 +1,12 @@
 package com.zhixiao.wanandroid.base.view;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.zhixiao.wanandroid.base.presenter.BasePresenter;
 
@@ -16,8 +22,15 @@ public abstract class MVPBaseFragment<T extends BasePresenter> extends AbstractB
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         presenter = createPresenter();
         presenter.attachView(this);
+        return view;
     }
 
     @Override

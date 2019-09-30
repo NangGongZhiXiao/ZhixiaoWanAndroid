@@ -63,6 +63,7 @@ public class HomeArticleData implements Serializable {
     private int visible;
     private int zan;
     private List<TagsBean> tags;
+    private String shareUser;
 
     public String getApkLink() {
         return apkLink;
@@ -254,6 +255,14 @@ public class HomeArticleData implements Serializable {
 
     public void setTags(List<TagsBean> tags) {
         this.tags = tags;
+    }
+
+    public String getShareUser() {
+        return shareUser;
+    }
+
+    public void setShareUser(String shareUser) {
+        this.shareUser = shareUser;
     }
 
     public static class TagsBean implements Serializable {

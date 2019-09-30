@@ -43,21 +43,21 @@ public class MainPresenter extends AbstractBasePresenter<MainContract.View> impl
     @Override
     public void attachView(MainContract.View view) {
         super.attachView(view);
-        dataRepository = APP.getInstance().getDataRepository();
-        addDisposable(dataRepository.HomeArticleListData(0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ResponseBody<HomeArticleListData>>() {
-                    @Override
-                    public void accept(ResponseBody<HomeArticleListData> homeArticleListDataResponseBody) throws Exception {
-                        LogUtil.i(homeArticleListDataResponseBody.toString());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        LogUtil.i(throwable.toString());
-                    }
-                })
-        );
+//        dataRepository = APP.getInstance().getDataRepository();
+//        addDisposable(dataRepository.HomeArticleListData(0)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<ResponseBody<HomeArticleListData>>() {
+//                    @Override
+//                    public void accept(ResponseBody<HomeArticleListData> homeArticleListDataResponseBody) throws Exception {
+//                        LogUtil.i(homeArticleListDataResponseBody.toString());
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//                        LogUtil.i(throwable.toString());
+//                    }
+//                })
+//        );
     }
 }

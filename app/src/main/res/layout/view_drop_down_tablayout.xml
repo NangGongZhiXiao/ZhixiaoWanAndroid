@@ -14,16 +14,21 @@
         app:tabMode="scrollable"
         app:tabRippleColor="@android:color/transparent"/>
 
-    <com.nex3z.flowlayout.FlowLayout
-        android:id="@+id/fl_drop_down_tablayout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_drop_down_tablayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        app:flChildSpacing="8dp"
-        app:flRowSpacing="5dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:visibility="gone">
+        <com.nex3z.flowlayout.FlowLayout
+            android:id="@+id/fl_drop_down_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:flChildSpacing="8dp"
+            app:flRowSpacing="5dp"/>
+    </androidx.core.widget.NestedScrollView>
 
     <ImageView
         android:id="@+id/img_drop_down_tablayout"

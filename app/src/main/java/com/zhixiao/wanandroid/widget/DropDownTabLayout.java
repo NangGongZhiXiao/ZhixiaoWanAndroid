@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.nex3z.flowlayout.FlowLayout;
 import com.zhixiao.wanandroid.R;
+import com.zhixiao.wanandroid.utils.LogUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class DropDownTabLayout extends LinearLayout {
     private TabLayout tabLayout;
     private ImageView imageView;
     private FlowLayout flowLayout;
+    private NestedScrollView scrollView;
     private Adapter pagerAdapter;
     private DataSetObserver pagerAdapterObserver;
     private Context context;
@@ -79,6 +82,7 @@ public class DropDownTabLayout extends LinearLayout {
         tabLayout = view.findViewById(R.id.tl_drop_down_tablayout);
         flowLayout = view.findViewById(R.id.fl_drop_down_tablayout);
         imageView = view.findViewById(R.id.img_drop_down_tablayout);
+        scrollView = view.findViewById(R.id.nsv_drop_down_tablayout);
         imageView.setOnClickListener(getImageClickListener());
     }
 
@@ -126,9 +130,7 @@ public class DropDownTabLayout extends LinearLayout {
                 if(onDropDownListener != null){
                     onDropDownListener.onDropDown(isDropDown);
                 }
-                imageView.setImageResource(isDropDown ? lessImgResId : moreImgResId);
-                tabLayout.setVisibility(isDropDown ? GONE : VISIBLE);
-                flowLayout.setVisibility(isDropDown ? VISIBLE : GONE);
+                setDropDown(isDropDown);
             }
         };
     }
@@ -186,6 +188,7 @@ public class DropDownTabLayout extends LinearLayout {
                     int position;
                     View curView = flowLayout.getChildAt(getRealPosition(
                             position = tabLayout.getSelectedTabPosition()));
+                    LogUtil.d("OnTabSelectedListener " + position);
                     if(curView != null) {
                         setSelectedView(curView);
                         if(tabSelectedListener != null){
@@ -241,6 +244,7 @@ public class DropDownTabLayout extends LinearLayout {
      */
     private void populateFromPagerAdapter() {
         if(pagerAdapter != null){
+            flowLayout.removeAllViews();
             int curItem;
             for (curItem = 0; curItem < pagerAdapter.getCount(); curItem++) {
                 // 添加组标题
@@ -411,5 +415,16 @@ public class DropDownTabLayout extends LinearLayout {
 
     public static abstract class Adapter extends PagerAdapter{
         protected abstract CharSequence getGroupTitle(int position);
+    }
+
+    public void setDropDown(boolean dropDown){
+        this.isDropDown = dropDown;
+        imageView.setImageResource(isDropDown ? lessImgResId : moreImgResId);
+        tabLayout.setVisibility(isDropDown ? GONE : VISIBLE);
+        scrollView.setVisibility(isDropDown ? VISIBLE : GONE);
+    }
+
+    public TabLayout getTabLayout() {
+        return tabLayout;
     }
 }

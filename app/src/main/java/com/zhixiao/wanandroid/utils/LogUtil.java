@@ -30,7 +30,7 @@ public class LogUtil {
         FormatStrategy strategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(true)
                 .methodCount(1)
-                .methodOffset(0)
+                .methodOffset(1)
                 .tag(TAG)
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(strategy){

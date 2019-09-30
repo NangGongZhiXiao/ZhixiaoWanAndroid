@@ -13,6 +13,7 @@
         app:ddtl_tabpadding_end="10dp"
         app:ddtl_tabpadding_top="5dp"
         app:ddtl_tabpadding_bottom="5dp"
+        app:tabMode="scrollable"
         android:background="@color/color_background2"
         android:elevation="1dp"/>
 
