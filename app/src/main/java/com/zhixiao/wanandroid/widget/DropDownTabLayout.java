@@ -188,7 +188,7 @@ public class DropDownTabLayout extends LinearLayout {
                     int position;
                     View curView = flowLayout.getChildAt(getRealPosition(
                             position = tabLayout.getSelectedTabPosition()));
-                    LogUtil.d("OnTabSelectedListener " + position);
+//                    LogUtil.d("OnTabSelectedListener " + position);
                     if(curView != null) {
                         setSelectedView(curView);
                         if(tabSelectedListener != null){

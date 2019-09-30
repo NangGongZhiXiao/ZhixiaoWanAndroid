@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zhixiao.wanandroid.R;
 import com.zhixiao.wanandroid.adapter.ArticleListAdapter;
 import com.zhixiao.wanandroid.base.view.MVPBaseFragmentWithoutSwipeBack;
@@ -24,6 +25,7 @@ import com.zhixiao.wanandroid.presenter.main.ArticlePresenter;
 import com.zhixiao.wanandroid.utils.LogUtil;
 import com.zhixiao.wanandroid.widget.DropDownTabLayout;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -41,6 +43,7 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
     private KnowledgeHierarchyData articleListName;
     private Map<Integer, ? extends CharSequence> artLNGroupTitle;
     private SparseArray<ArticleListAdapter> articleListAdapters;
+    private SparseArray<WeakReference<SmartRefreshLayout>> refreshLayoutRefs;
 
     @BindView(R.id.tl_article)
     public DropDownTabLayout dropDownTabLayout;
@@ -50,13 +53,14 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
     @Override
     protected void initEventAndData() {
         articleListAdapters = new SparseArray<>();
+        refreshLayoutRefs = new SparseArray<>();
     }
 
     @Override
     protected void initView() {
         dropDownTabLayout.setupWithViewPager(vpArticle);
         dropDownTabLayout.setOnTabSelectedListener(this);
-        vpArticle.setAdapter(viewPagerAdapter = getViewPagerAdapter());
+        vpArticle.setAdapter(getViewPagerAdapter());
     }
 
     private DropDownTabLayout.Adapter getViewPagerAdapter() {
@@ -82,7 +86,23 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
     public void updateArticleListNames(KnowledgeHierarchyData data, Map<Integer, ? extends CharSequence> groupTitle) {
         articleListName = data;
         artLNGroupTitle = groupTitle;
+        pagerAdapterNotifyDataSetChanged();
+    }
+
+
+
+    private void pagerAdapterNotifyDataSetChanged() {
         viewPagerAdapter.notifyDataSetChanged();
+        // notifyDataSetChanged之后会造成TabLayout显示位置的错误
+        // 需要重新选择使其回到正确的位置
+        TabLayout tabLayout = dropDownTabLayout.getTabLayout();
+        tabLayout.post(() -> {
+            TabLayout.Tab selectedTab = tabLayout.getTabAt(
+                    tabLayout.getSelectedTabPosition());
+            if (selectedTab != null) {
+                selectedTab.select();
+            }
+        });
     }
 
     @Override
@@ -93,21 +113,28 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
     @Override
     public void updateArticleList(HomeArticleListData data, int position) {
         LogUtil.i("update article list " + data);
+        if(data == null) return;
+        SmartRefreshLayout refreshLayout = refreshLayoutRefs.get(position).get();
         ArticleListAdapter adapter = articleListAdapters.get(position);
         if(adapter != null){
-            adapter.setNewData(data.getDatas());
-            viewPagerAdapter.notifyDataSetChanged();
-            TabLayout tabLayout = dropDownTabLayout.getTabLayout();
-            tabLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    TabLayout.Tab selectedTab = tabLayout.getTabAt(
-                            tabLayout.getSelectedTabPosition());
-                    if (selectedTab != null) {
-                        selectedTab.select();
+            if(data.getCurPage() == 1) {
+                adapter.setNewData(data.getDatas());
+                if(refreshLayout != null){
+                    refreshLayout.finishRefresh();
+                    if(data.getCurPage() >= data.getPageCount()){
+                        refreshLayout.finishLoadMoreWithNoMoreData();
                     }
                 }
-            });
+            }else{
+                adapter.addData(data.getDatas());
+                if(refreshLayout != null){
+                    refreshLayout.finishLoadMore();
+                    if(data.getCurPage() >= data.getPageCount()){
+                        refreshLayout.finishLoadMoreWithNoMoreData();
+                    }
+                }
+            }
+            pagerAdapterNotifyDataSetChanged();
         }
     }
 
@@ -144,7 +171,14 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
 //                TextView textView = new TextView(getActivity());
 //                textView.setText(articleListName.getChildren().get(position).getName());
 //                container.addView(textView);
+            SmartRefreshLayout refreshLayout = getItemView(position);
+            container.addView(refreshLayout);
+            return refreshLayout;
+        }
+
+        private SmartRefreshLayout getItemView(int position) {
             RecyclerView recyclerView = new RecyclerView(getContext());
+            // adapter
             ArticleListAdapter articleListAdapter;
             recyclerView.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -154,11 +188,27 @@ public class ArticleFragment extends MVPBaseFragmentWithoutSwipeBack<ArticleCont
             }else{
                 articleListAdapter = articleListAdapters.get(position);
             }
+            articleListAdapter.setEnableLoadMore(true);
+            articleListAdapter.setUpFetchEnable(true);
+//            articleListAdapter.setOnLoadMoreListener(() -> {
+//                int page = articleListAdapter.getData().size() / 20;
+//                presenter.loadArticleList(articleListName.getChildren().get(position).getId(), page, position);
+//            }, recyclerView);
+            // recyclerView
             recyclerView.setAdapter(articleListAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-            container.addView(recyclerView);
-            return recyclerView;
+            // refreshLayout
+            SmartRefreshLayout refreshLayout = new SmartRefreshLayout(getContext());
+            refreshLayout.addView(recyclerView);
+            refreshLayout.setOnLoadMoreListener(refreshLayout1 -> {
+                int page = articleListAdapter.getData().size() / 20;
+                presenter.loadArticleList(articleListName.getChildren().get(position).getId(), page, position);
+            });
+            refreshLayout.setOnRefreshListener(refreshLayout1 ->
+                    presenter.loadArticleList(articleListName.getChildren().get(position).getId(), 0, position));
+            refreshLayoutRefs.put(position, new WeakReference<>(refreshLayout));
+            return refreshLayout;
         }
 
         @Override
